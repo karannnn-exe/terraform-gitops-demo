@@ -9,7 +9,7 @@ pipeline {
     disableConcurrentBuilds()  // only one job at a time
   }
  triggers {
-    cron('*/1 * * * *')  // every 1 minute
+    cron('*/5 * * * *')  
   }
   stages {
     stage('Checkout') {
@@ -39,12 +39,6 @@ pipeline {
         dir('terraform') {
           sh 'terraform plan -out=tfplan'
         }
-      }
-    }
-
-    stage('Approval') {
-      steps {
-        input message: 'Approve Terraform Apply?'
       }
     }
 
